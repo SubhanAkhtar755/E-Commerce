@@ -149,7 +149,7 @@ const ProductsDetails = () => {
     try {
       setLoading(true);
       await axios.post(
-        "https://e-commerce-h7o7.onrender.com/api/cart/add",
+        "https://e-commerce-1-f4a7.onrender.com/api/cart/add",
         {
           productId: product._id,
           name: product.name,

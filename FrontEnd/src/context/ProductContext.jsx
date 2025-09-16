@@ -13,7 +13,7 @@ export const ProductProvider = ({ children }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://e-commerce-h7o7.onrender.com/api/products");
+      const res = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/products");
       setProducts(res.data);   // assuming API returns array of products
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch products");
@@ -26,7 +26,7 @@ export const ProductProvider = ({ children }) => {
   const fetchProductById = async (id) => {
     try {
       setLoading(true);
-      const res = await axios.get(`https://e-commerce-h7o7.onrender.com/api/products/${id}`);
+      const res = await axios.get(`https://e-commerce-1-f4a7.onrender.com/api/products/${id}`);
       setProduct(res.data);   // assuming API returns single product object
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch product");

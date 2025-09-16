@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("https://e-commerce-h7o7.onrender.com/api/user/my-profile", {
+      const res = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/user/my-profile", {
         withCredentials: true,
       });
       setUser(res.data.user);

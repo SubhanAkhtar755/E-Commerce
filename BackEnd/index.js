@@ -27,8 +27,7 @@ app.use(cookieParser());
 // ✅ Fix CORS (frontend aur backend same domain pe aayenge to zarurat bhi nahi padegi, but abhi rakho)
 app.use(cors({
   origin: [
-    "https://e-commerce-h7o7.onrender.com", // 👈 agar frontend bhi yahin hoga
-    "https://e-commerce-h7o7.netlify.app"   // 👈 agar alag Netlify rakha to
+    "https://e-commerce-1-f4a7.onrender.com",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true

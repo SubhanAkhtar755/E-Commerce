@@ -38,7 +38,7 @@ const AllUsers = () => {
     const fetchUsers = async () => {
       try {
         const res = await axios.get(
-          "https://e-commerce-h7o7.onrender.com/api/user/all-users",
+          "https://e-commerce-1-f4a7.onrender.com/api/user/all-users",
           {
             withCredentials: true,
           }

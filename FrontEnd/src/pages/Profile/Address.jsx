@@ -58,7 +58,7 @@ const Address = () => {
     const toastId = toast.loading("Updating address...");
     try {
       // ✅ sirf address object bhej rahe hain
-      const res = await fetch("https://e-commerce-h7o7.onrender.com/api/user/update-account", {
+      const res = await fetch("https://e-commerce-1-f4a7.onrender.com/api/user/update-account", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -33,7 +33,7 @@ const Products = () => {
   // Fetch products
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("https://e-commerce-h7o7.onrender.com/api/products");
+      const res = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/products");
       const data = res.data.products || res.data;
       setProducts(Array.isArray(data) ? data : []);
     } catch (err) {
@@ -46,7 +46,7 @@ const Products = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure to delete this product?")) return;
     try {
-      await axios.delete(`https://e-commerce-h7o7.onrender.com/api/products/${id}`, {
+      await axios.delete(`https://e-commerce-1-f4a7.onrender.com/api/products/${id}`, {
         withCredentials: true,
       });
       toast.success("Product deleted");
