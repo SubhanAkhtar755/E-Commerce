@@ -50,3 +50,9 @@
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
 }
+/* Arrow color change */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: #F59E0B;   /* 👈 apna desired color */
+  font-size: 20px; /* 👈 arrow size bhi control kar sakte ho */
+}

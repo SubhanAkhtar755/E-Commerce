@@ -6,12 +6,12 @@ const LoginController = async (req, res) => {
         const { email, password } = req.body;
         const { token, user } = await LoginService(email, password);
 
-        // Set token in cookie
-      res.cookie("token", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",  // dev me false, prod me true
-  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-});
+        // ✅ Production ke liye (Render + Netlify)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,      // hamesha true rakho kyunki HTTPS hai
+            sameSite: "None",  // cross-site cookie ke liye required
+        });
 
 
         res.status(200).send({

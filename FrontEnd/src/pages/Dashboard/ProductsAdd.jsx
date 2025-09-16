@@ -116,7 +116,7 @@ const ProductsAdd = ({ editMode = false }) => {
         toast.success("✅ Product Added Successfully!");
       }
 
-      navigate("/products");
+      navigate("/dashboard/products");
     } catch (err) {
       console.error(err.response?.data || err.message);
       toast.error("❌ Failed to save product");

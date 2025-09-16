@@ -16,15 +16,17 @@ const orderSchema = new Schema(
       },
     ],
 
-    // 🏠 Snapshot of address at the time of order
-    shippingAddress: {
-      street: String,
-      city: String,
-      state: String,
-      postalCode: String,
-      country: { type: String, default: "Pakistan" },
-      phone: String,
-    },
+shippingAddress: {
+  type: {
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    postalCode: { type: String, required: true },
+    country: { type: String, required: true },
+    phone: { type: String, required: true },
+  },
+  required: true,
+},
 
     // 💳 Payment Info
     paymentMethod: {

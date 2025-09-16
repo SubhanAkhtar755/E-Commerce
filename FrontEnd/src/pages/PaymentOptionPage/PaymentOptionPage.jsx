@@ -14,8 +14,7 @@ const PaymentOptionPage = () => {
   const [method, setMethod] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const { product, subTotal, deliveryCharges, totalAmount } =
-    location.state || {};
+  const { product, subTotal, deliveryCharges, totalAmount } = location.state || {};
 
   const theme = darkMode
     ? {
@@ -37,7 +36,7 @@ const PaymentOptionPage = () => {
         inputBg:
           "bg-white text-[#111827] placeholder-[#4B5563] border border-gray-300 focus:ring-[#3B82F6]",
         btnPrimary: "bg-[#F59E0B] hover:bg-[#F59E0B] text-white",
-         btnSelected: "bg-[#3B82F6] text-white border-[#3B82F6]",
+        btnSelected: "bg-[#3B82F6] text-white border-[#3B82F6]",
         btnUnselected: "bg-white hover:bg-gray-100 border-gray-300",
       };
 
@@ -51,6 +50,12 @@ const PaymentOptionPage = () => {
 
   const handleCheckout = async () => {
     if (!method) return toast.error("Please select a payment method!");
+
+    // Check if user.address exists and has keys
+    if (!user.address || Object.keys(user.address).length === 0) {
+      return toast.error("Please add a shipping address before checkout!");
+    }
+
     setLoading(true);
     try {
       if (method === "COD") {
@@ -65,11 +70,15 @@ const PaymentOptionPage = () => {
               image: product.image,
             },
           ],
-          shippingAddress: user.address || {},
           paymentMethod: "COD",
           paymentStatus: "Pending",
           totalAmount,
         };
+
+        // Only add shippingAddress if it exists and has properties
+        if (user.address && Object.keys(user.address).length > 0) {
+          orderData.shippingAddress = user.address;
+        }
 
         const res = await axios.post(
           "https://e-commerce-h7o7.onrender.com/api/orders",
@@ -93,14 +102,12 @@ const PaymentOptionPage = () => {
 
   return (
     <div className={`p-6 lg:pl-44 lg:pr-44 min-h-screen ${theme.bg} ${theme.text}`}>
-      <h2 className="text-2xl font-semibold mb-6 text-center">
-        Choose Payment Method
-      </h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">Choose Payment Method</h2>
 
       {/* 🏠 Shipping Address */}
       <div className={`p-4 rounded-lg mb-6 shadow-sm ${theme.card}`}>
         <h3 className="font-semibold text-lg mb-2">Shipping Address</h3>
-        {user?.address ? (
+        {user?.address && Object.keys(user.address).length > 0 ? (
           <>
             <p>
               {user.address.street}, {user.address.city}, {user.address.state} -{" "}
@@ -121,12 +128,9 @@ const PaymentOptionPage = () => {
           <button
             key={option}
             onClick={() => setMethod(option)}
-            className={`w-full p-4 rounded-lg border text-left shadow-sm transition 
-              ${
-                method === option
-                  ? theme.btnSelected
-                  : theme.btnUnselected
-              }`}
+            className={`w-full p-4 rounded-lg border text-left shadow-sm transition ${
+              method === option ? theme.btnSelected : theme.btnUnselected
+            }`}
           >
             <span className="font-medium text-lg">
               {option === "COD" ? "💵 Cash on Delivery" : "💳 PayOnline"}
