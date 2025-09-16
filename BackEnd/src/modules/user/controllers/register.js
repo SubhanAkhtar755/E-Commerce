@@ -6,26 +6,20 @@ const RegisterController = async (req, res) => {
         const Data = await PostService(req.body, req.files); // 👈 processed data from service
         const { token, user, message } = Data;
 
-        // ✅ Send token in secure cookie
-     res.cookie("token", token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",  // dev me false, prod me true
-  sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-});
+        // ❌ yahan cookie set mat karo
 
-
-        // ✅ Send response
+        // ✅ sirf response bhejo
         res.status(200).send({
             status: 200,
             message: message || POST_DATA_MESSAGE,
             user,
-            token
+            token, // frontend ko use krny k liye bhej do
         });
     } catch (err) {
         res.status(500).send({
             status: 500,
             message: INTERNAL_SERVER_ERROR_MESSAGE,
-            error: err.message
+            error: err.message,
         });
     }
 };

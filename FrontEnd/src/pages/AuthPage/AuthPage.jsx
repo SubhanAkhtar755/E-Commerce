@@ -51,24 +51,16 @@ export default function AuthPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // extract domain
   const emailDomain = formData.email.split("@")[1]?.toLowerCase();
-
-  if (!isLogin) {
-    // sirf gmail.com allow
-    if (emailDomain !== "gmail.com") {
-      toast.error("❌ Only Gmail accounts are allowed to register.");
-      return;
-    }
+  if (!isLogin && emailDomain !== "gmail.com") {
+    toast.error("❌ Only Gmail accounts are allowed to register.");
+    return;
   }
 
-  const toastId = toast.loading(
-    isLogin ? "Logging in..." : "Registering...",
-    { position: "top-right" }
-  );
+  const toastId = toast.loading(isLogin ? "Logging in..." : "Registering...");
 
   try {
     const url = `https://e-commerce-h7o7.onrender.com/api/user/${
@@ -77,49 +69,52 @@ export default function AuthPage() {
 
     const payload = isLogin
       ? { email: formData.email, password: formData.password }
-      : {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        };
+      : { name: formData.name, email: formData.email, password: formData.password };
 
     const res = await axios.post(url, payload, { withCredentials: true });
 
-    // ✅ Profile fetch
-    const profile = await axios.get(
-      "https://e-commerce-h7o7.onrender.com/api/user/my-profile",
-      { withCredentials: true }
-    );
-    setUser(profile.data.user);
+    if (isLogin) {
+      // ✅ Login case
+      const profile = await axios.get(
+        "https://e-commerce-h7o7.onrender.com/api/user/my-profile",
+        { withCredentials: true }
+      );
+      setUser(profile.data.user);
+      await fetchCart();
 
-    // ✅ Cart fetch
-    await fetchCart();
+      toast.update(toastId, {
+        render: res.data.message || "Login successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
 
-    toast.update(toastId, {
-      render:
-        res.data.message ||
-        (isLogin ? "Login successful!" : "Registered successfully!"),
-      type: "success",
-      isLoading: false,
-      autoClose: 3000,
-    });
+      setTimeout(() => navigate("/"), 500);
+    } else {
+      // ✅ Register case
+      toast.update(toastId, {
+        render: res.data.message || "Registered successfully! Please login.",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+
+      setTimeout(() => {
+        setIsLogin(true); // switch to login form
+        navigate("/AuthPage"); // ya jo bhi tumhari login page route hai
+      }, 500);
+    }
 
     setFormData({ name: "", email: "", password: "" });
-
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
   } catch (err) {
     toast.update(toastId, {
-      render:
-        err.response?.data?.message || "Something went wrong. Try again!",
+      render: err.response?.data?.message || "Something went wrong. Try again!",
       type: "error",
       isLoading: false,
       autoClose: 3000,
     });
   }
 };
-
 
   return (
     <div
