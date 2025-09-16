@@ -6,11 +6,11 @@ const LoginController = async (req, res) => {
         const { email, password } = req.body;
         const { token, user } = await LoginService(email, password);
 
-        // ✅ Production ke liye (Render + Netlify)
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,      // hamesha true rakho kyunki HTTPS hai
-            sameSite: "None",  // cross-site cookie ke liye required
+            secure: true,       // ✅ Render hamesha HTTPS deta hai
+            sameSite: "None",   // ✅ Netlify (frontend) + Render (backend) cross-site hai
+            path: "/",          // ✅ important, warna kuch browser block kar dete hain
         });
 
 
