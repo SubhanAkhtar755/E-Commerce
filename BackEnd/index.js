@@ -24,7 +24,6 @@ app.use(cookieParser());
 // 🚀 Fix CORS properly
 app.use(cors({
   origin: [
-    "http://localhost:5173",     // local frontend
     "https://e-commerce-h7o7.netlify.app" // deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
