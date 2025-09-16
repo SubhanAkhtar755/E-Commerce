@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost:5173",     // local frontend
-    "https://blog-site-6od5.onrender.com" // deployed frontend
+    "https://e-commerce-h7o7.netlify.app" // deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true

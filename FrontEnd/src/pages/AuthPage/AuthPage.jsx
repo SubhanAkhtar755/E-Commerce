@@ -71,7 +71,7 @@ export default function AuthPage() {
   );
 
   try {
-    const url = `http://localhost:4001/api/user/${
+    const url = `https://e-commerce-h7o7.onrender.com/api/user/${
       isLogin ? "login" : "register"
     }`;
 
@@ -87,7 +87,7 @@ export default function AuthPage() {
 
     // ✅ Profile fetch
     const profile = await axios.get(
-      "http://localhost:4001/api/user/my-profile",
+      "https://e-commerce-h7o7.onrender.com/api/user/my-profile",
       { withCredentials: true }
     );
     setUser(profile.data.user);

@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:4001/api/cart", {
+      const res = await axios.get("https://e-commerce-h7o7.onrender.com/api/cart", {
         withCredentials: true,
       });
       setCart(res.data.cart?.items || []);
@@ -28,7 +28,7 @@ export const CartProvider = ({ children }) => {
     if (quantity < 1) return;
     try {
       await axios.put(
-        `http://localhost:4001/api/cart/update/${productId}`,
+        `https://e-commerce-h7o7.onrender.com/api/cart/update/${productId}`,
         { quantity },
         { withCredentials: true }
       );
@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
   const removeItem = async (productId) => {
     try {
       await axios.delete(
-        `http://localhost:4001/api/cart/remove/${productId}`,
+        `https://e-commerce-h7o7.onrender.com/api/cart/remove/${productId}`,
         { withCredentials: true }
       );
       fetchCart();
@@ -56,7 +56,7 @@ export const CartProvider = ({ children }) => {
     try {
       await Promise.all(
         selectedItems.map((id) =>
-          axios.delete(`http://localhost:4001/api/cart/remove/${id}`, {
+          axios.delete(`https://e-commerce-h7o7.onrender.com/api/cart/remove/${id}`, {
             withCredentials: true,
           })
         )
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }) => {
   // ✅ Clear cart
   const clearCart = async () => {
     try {
-      await axios.delete("http://localhost:4001/api/cart/clear", {
+      await axios.delete("https://e-commerce-h7o7.onrender.com/api/cart/clear", {
         withCredentials: true,
       });
       setCart([]);
