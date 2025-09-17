@@ -34,10 +34,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ✅ Serve frontend
-const frontendPath = path.join(__dirname, "../FrontEnd/dist");
+const frontendPath = path.resolve(__dirname, "../FrontEnd/dist");
 app.use(express.static(frontendPath));
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
+  res.sendFile(path.resolve(frontendPath, "index.html"));
 });
 
 // ✅ MongoDB connection checks
