@@ -9,7 +9,6 @@ import {
   cancelOrderController
 } from "./controllers/orderController.js";
 import authMiddleware from "../../middlewares/auth.js";
-import { updatePaymentController } from "./controllers/paymentController.js";
 import { getDeliveredRevenueController } from "../orders/controllers/calculateController.js";
 
 import {
@@ -30,8 +29,6 @@ router.put("/:id",authMiddleware , adminCheck ,  updateOrderController); // upda
 
 router.put("/:id/cancel", authMiddleware, cancelOrderController);
 
-// 💳 Payment
-router.put("/:id/payment", updatePaymentController); // update payment status
 
 router.get("/revenue/cod", getDeliveredRevenueController); // 👈 example endpoint
 

@@ -7,6 +7,7 @@ import env from 'dotenv';
 import fileUpload from 'express-fileupload';
 import cookieParser from "cookie-parser";
 import cors from 'cors';
+import path from 'path';
 
 const app = express();
 env.config(); // ✅ required for .env
@@ -44,9 +45,18 @@ mongoose.connection.on("open", () => {
   console.log(chalk.magentaBright.bgWhite("----------MongoDB connection successful----------"));
 });
 
+
+const _dirname = path.resolve();
+
+
+
+app.use(express.static(path.join(_dirname, "/FrontEnd/dist")));
+app.get("*", (_, res) => {
+  res.sendFile(path.resolve(_dirname, "FrontEnd", "dist", "index.html"))
+});
+
 // ✅ Routing
 app.use('/api', routes);
-
 // ✅ Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
