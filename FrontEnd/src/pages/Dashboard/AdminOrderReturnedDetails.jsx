@@ -36,7 +36,7 @@ const AdminOrderReturnedDetails = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const res = await axios.get(`https://e-commerce-1-f4a7.onrender.com/api/orders/${id}`, {
+        const res = await axios.get(`http://localhost:4001/api/orders/${id}`, {
           withCredentials: true,
         });
         setOrder(res.data);

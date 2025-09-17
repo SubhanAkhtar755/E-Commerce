@@ -70,7 +70,7 @@ const Navbar = React.memo(() => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://e-commerce-1-f4a7.onrender.com/api/user/logout",
+        "http://localhost:4001/api/user/logout",
         {},
         { withCredentials: true }
       );

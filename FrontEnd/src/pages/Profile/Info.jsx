@@ -85,7 +85,7 @@ const Info = () => {
       }
 
       const res = await fetch(
-        "https://e-commerce-1-f4a7.onrender.com/api/user/update-account",
+        "http://localhost:4001/api/user/update-account",
         {
           method: "PUT",
           credentials: "include",

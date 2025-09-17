@@ -23,14 +23,14 @@ export const DashboardProvider = ({ children }) => {
       setLoading(true);
 
       // 🔹 All Users
-      const usersRes = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/user/all-users", { withCredentials: true });
+      const usersRes = await axios.get("http://localhost:4001/api/user/all-users", { withCredentials: true });
     
 
       // 🔹 All Products
-      const productsRes = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/products", { withCredentials: true });
+      const productsRes = await axios.get("http://localhost:4001/api/products", { withCredentials: true });
 
       // 🔹 Revenue & Returns
-      const revenueRes = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/orders/revenue/cod", { withCredentials: true });
+      const revenueRes = await axios.get("http://localhost:4001/api/orders/revenue/cod", { withCredentials: true });
 
       setUsersCount(usersRes.data?.length ?? 0);
       setProductsCount(productsRes.data?.length ?? 0);

@@ -63,7 +63,7 @@ export default function AuthPage() {
   const toastId = toast.loading(isLogin ? "Logging in..." : "Registering...");
 
   try {
-    const url = `https://e-commerce-1-f4a7.onrender.com/api/user/${
+    const url = `http://localhost:4001/api/user/${
       isLogin ? "login" : "register"
     }`;
 
@@ -76,7 +76,7 @@ export default function AuthPage() {
     if (isLogin) {
       // ✅ Login case
       const profile = await axios.get(
-        "https://e-commerce-1-f4a7.onrender.com/api/user/my-profile",
+        "http://localhost:4001/api/user/my-profile",
         { withCredentials: true }
       );
       setUser(profile.data.user);

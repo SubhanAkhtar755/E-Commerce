@@ -4,8 +4,6 @@ import routes from './src/routes/index.js';
 import mongoose from './src/db/index.js';
 import chalk from 'chalk';
 import env from 'dotenv';
-import path from "path";
-import { fileURLToPath } from "url";
 import fileUpload from 'express-fileupload';
 import cookieParser from "cookie-parser";
 import cors from 'cors';
@@ -14,30 +12,27 @@ const app = express();
 env.config(); // ✅ required for .env
 
 // ✅ Middleware
+
+// 🚀 Increase body size limit for large payloads (images, etc.)
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ limit: "20mb", extended: true }));
+
 app.use(fileUpload({ useTempFiles: true, tempFileDir: '/tmp/' }));
 app.use(helmet());
 app.use(cookieParser());
 
-// ✅ Fix CORS properly
+// 🚀 Fix CORS properly
 app.use(cors({
   origin: [
-    "https://e-commerce-1-f4a7.onrender.com",
+    "http://localhost:5173" // deployed frontend
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true
 }));
 
-// dirname config (ESM ke liye)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ Serve frontend
-const frontendPath = path.resolve(__dirname, "../FrontEnd/dist");
-app.use(express.static(frontendPath));
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.resolve(frontendPath, "index.html"));
+// ✅ Test route
+app.get('/', (req, res) => {
+  res.send(new Date().toString());
 });
 
 // ✅ MongoDB connection checks

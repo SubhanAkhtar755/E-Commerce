@@ -81,7 +81,7 @@ const PaymentOptionPage = () => {
         }
 
         const res = await axios.post(
-          "https://e-commerce-1-f4a7.onrender.com/api/orders",
+          "http://localhost:4001/api/orders",
           orderData,
           { withCredentials: true }
         );

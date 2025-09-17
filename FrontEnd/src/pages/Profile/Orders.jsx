@@ -76,7 +76,7 @@ const Orders = () => {
       if (!user?._id) return;
       try {
         setLoading(true);
-        const res = await axios.get("https://e-commerce-1-f4a7.onrender.com/api/orders/my", {
+        const res = await axios.get("http://localhost:4001/api/orders/my", {
           withCredentials: true,
         });
         setOrders(res.data || []);
@@ -96,7 +96,7 @@ const Orders = () => {
   const handleCancel = async (orderId) => {
     try {
       await axios.put(
-        `https://e-commerce-1-f4a7.onrender.com/api/orders/${orderId}/cancel`,
+        `http://localhost:4001/api/orders/${orderId}/cancel`,
         {},
         { withCredentials: true }
       );
