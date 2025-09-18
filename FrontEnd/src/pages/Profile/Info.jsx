@@ -85,7 +85,7 @@ const Info = () => {
       }
 
       const res = await fetch(
-        "http://localhost:4001/api/user/update-account",
+        "/api/user/update-account",
         {
           method: "PUT",
           credentials: "include",

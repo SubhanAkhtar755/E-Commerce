@@ -37,6 +37,7 @@ const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const Home = () => {
   const { darkMode } = useDarkMode();
   const { products, loading, error } = useProducts();
+console.log(products);
 
   const theme = darkMode
     ? {
@@ -125,7 +126,29 @@ const Home = () => {
           </SwiperSlide>
         </Swiper>
       </section>
-
+      {/* Small Promo Banners */}
+      <section className="px-6 md:px-16 py-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <img
+          src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800"
+          alt="Promo1"
+          className="rounded-lg shadow-md"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1200"
+          alt="Promo2"
+          className="rounded-lg shadow-md"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=1200"
+          alt="Promo3"
+          className="rounded-lg shadow-md"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1507680434567-5739c80be1ac?w=1200"
+          alt="Promo4"
+          className="rounded-lg shadow-md"
+        />
+      </section>
       {/* Flash Sale Section */}
       {saleProducts.length > 0 && (
         <section className="px-2 lg:px-8 py-10 relative">

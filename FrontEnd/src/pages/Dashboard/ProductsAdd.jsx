@@ -49,7 +49,7 @@ const ProductsAdd = ({ editMode = false }) => {
       const fetchProduct = async () => {
         try {
           const res = await axios.get(
-            `http://localhost:4001/api/products/${id}`
+            `/api/products/${id}`
           );
           const product = res.data;
 
@@ -103,13 +103,13 @@ const ProductsAdd = ({ editMode = false }) => {
       });
 
       if (editMode) {
-        await axios.put(`http://localhost:4001/api/products/${id}`, form, {
+        await axios.put(`/api/products/${id}`, form, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
         toast.success("✅ Product Updated Successfully!");
       } else {
-        await axios.post("http://localhost:4001/api/products", form, {
+        await axios.post("/api/products", form, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });

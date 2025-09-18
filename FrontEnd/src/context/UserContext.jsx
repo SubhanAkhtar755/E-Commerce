@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:4001/api/user/my-profile", {
+      const res = await axios.get("/api/user/my-profile", {
         withCredentials: true,
       });
       setUser(res.data.user);

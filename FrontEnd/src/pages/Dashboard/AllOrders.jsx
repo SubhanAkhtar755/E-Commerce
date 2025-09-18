@@ -38,7 +38,7 @@ const AllOrders = () => {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:4001/api/orders");
+        const res = await axios.get("/api/orders");
         setOrders(res.data);
       } catch (error) {
         toast.error("Failed to fetch orders");
@@ -54,7 +54,7 @@ const AllOrders = () => {
     setLoading(true);
     try {
       await axios.put(
-        `http://localhost:4001/api/orders/${id}`,
+        `/api/orders/${id}`,
         { orderStatus },
         { withCredentials: true }
       );
@@ -82,7 +82,7 @@ const AllOrders = () => {
     setLoading(true);
     try {
       await axios.put(
-        `http://localhost:4001/api/orders/${id}/return/status`,
+        `/api/orders/${id}/return/status`,
         { status: returnStatus },
         { withCredentials: true }
       );

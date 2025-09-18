@@ -81,7 +81,7 @@ const PaymentOptionPage = () => {
         }
 
         const res = await axios.post(
-          "http://localhost:4001/api/orders",
+          "/api/orders",
           orderData,
           { withCredentials: true }
         );

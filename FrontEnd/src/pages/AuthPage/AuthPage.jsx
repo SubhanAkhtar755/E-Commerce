@@ -63,7 +63,7 @@ export default function AuthPage() {
   const toastId = toast.loading(isLogin ? "Logging in..." : "Registering...");
 
   try {
-    const url = `http://localhost:4001/api/user/${
+    const url = `/api/user/${
       isLogin ? "login" : "register"
     }`;
 
@@ -76,7 +76,7 @@ export default function AuthPage() {
     if (isLogin) {
       // ✅ Login case
       const profile = await axios.get(
-        "http://localhost:4001/api/user/my-profile",
+        "/api/user/my-profile",
         { withCredentials: true }
       );
       setUser(profile.data.user);

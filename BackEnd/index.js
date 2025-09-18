@@ -25,16 +25,28 @@ app.use(cookieParser());
 // 🚀 Fix CORS properly
 app.use(cors({
   origin: [
-    "http://localhost:5173" // deployed frontend
+    "http://localhost:4001" // deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true
 }));
 
-// ✅ Test route
-app.get('/', (req, res) => {
-  res.send(new Date().toString());
-});
+// // ✅ Test route
+// app.get('/', (req, res) => {
+//   res.send(new Date().toString());
+// });
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:", "http:"], // ✅ allow external images
+      connectSrc: ["'self'", "http://localhost:4001"],
+    },
+  })
+);
 
 // ✅ MongoDB connection checks
 mongoose.connection.on("error", (err) => {
@@ -44,7 +56,8 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("open", () => {
   console.log(chalk.magentaBright.bgWhite("----------MongoDB connection successful----------"));
 });
-
+// ✅ Routing
+app.use('/api', routes);
 
 const _dirname = path.resolve();
 
@@ -55,8 +68,7 @@ app.get("*", (_, res) => {
   res.sendFile(path.resolve(_dirname, "FrontEnd", "dist", "index.html"))
 });
 
-// ✅ Routing
-app.use('/api', routes);
+
 // ✅ Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

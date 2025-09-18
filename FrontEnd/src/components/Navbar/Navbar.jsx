@@ -70,7 +70,7 @@ const Navbar = React.memo(() => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:4001/api/user/logout",
+        "/api/user/logout",
         {},
         { withCredentials: true }
       );

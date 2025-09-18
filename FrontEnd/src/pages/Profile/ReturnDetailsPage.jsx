@@ -49,7 +49,7 @@ const ReturnDetailPage = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const res = await axios.get(`http://localhost:4001/api/orders/${id}`, {
+        const res = await axios.get(`/api/orders/${id}`, {
           withCredentials: true,
         });
         setOrder(res.data);

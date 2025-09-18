@@ -13,7 +13,7 @@ export const ProductProvider = ({ children }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:4001/api/products");
+      const res = await axios.get("/api/products");
       setProducts(res.data);   // assuming API returns array of products
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch products");
@@ -26,7 +26,7 @@ export const ProductProvider = ({ children }) => {
   const fetchProductById = async (id) => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:4001/api/products/${id}`);
+      const res = await axios.get(`/api/products/${id}`);
       setProduct(res.data);   // assuming API returns single product object
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch product");
