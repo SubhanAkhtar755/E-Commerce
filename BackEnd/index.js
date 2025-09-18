@@ -25,7 +25,7 @@ app.use(cookieParser());
 // 🚀 Fix CORS properly
 app.use(cors({
   origin: [
-    "http://localhost:4001" // deployed frontend
+    "https://e-commerce-upo6.onrender.com" // deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true
