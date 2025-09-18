@@ -153,7 +153,7 @@ const Shop = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="grid gap-2 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto lg:px-2 px-2">
+      <div className="grid  gap-2 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto lg:px-2 px-2">
         {shuffledProducts.slice(0, visibleProducts).map((product) => {
           const hasDiscount =
             product.discountprice && product.discountprice < product.price;
@@ -167,12 +167,12 @@ const Shop = () => {
             <Link
               to={`/ProductsDetails/${product._id}`}
               key={product._id}
-              className="block"
+              className="block "
             >
               <div
-                className={`${theme.card} rounded-xl shadow-md hover:shadow-xl transition border overflow-hidden`}
+                className={`${theme.card} h-70 rounded-xl shadow-md hover:shadow-xl transition border overflow-hidden`}
               >
-                <div className="h-52 w-full overflow-hidden">
+                <div className="h-40 w-full overflow-hidden">
                   <img
                     src={
                       product.images?.[0]?.url ||
@@ -183,12 +183,12 @@ const Shop = () => {
                   />
                 </div>
 
-                <div className="p-4">
+                <div className="!p-3">
                   <h3 className="text-base font-semibold line-clamp-1 sm:line-clamp-2">
                     {product.name}
-                  </h3>
-                  <div className="mt-3">
-                    <div className="flex items-center gap-2">
+                  </h3> 
+                  <div className="">
+                    <div className="flex items-center gap-2 mt-1">
                       <span className="text-lg font-bold text-[#F59E0B]">
                         RS {hasDiscount ? product.discountprice : product.price}
                       </span>
@@ -217,8 +217,6 @@ const Shop = () => {
           <BottomSpinner />
         </div>
       )}
-
-    
     </div>
   );
 };
