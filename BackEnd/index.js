@@ -25,7 +25,7 @@ app.use(cookieParser());
 // 🚀 Fix CORS properly
 app.use(cors({
   origin: [
-    "https://e-commerce-upo6.onrender.com" // deployed frontend
+    "https://e-commerce-upo6.onrender.com" , // deployed frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // allowed methods
   credentials: true
@@ -43,7 +43,7 @@ app.use(
       scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:", "http:"], // ✅ allow external images
-      connectSrc: ["'self'", "http://localhost:4001"],
+      connectSrc: ["'self'", "https://e-commerce-upo6.onrender.com"],
     },
   })
 );

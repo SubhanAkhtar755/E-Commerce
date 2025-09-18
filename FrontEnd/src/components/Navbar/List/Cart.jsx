@@ -7,7 +7,9 @@ import SpinnerOverlay from "../../../components/Important/SpinnerOverlay.jsx";
 
 // ===== Skeleton Item =====
 const SkeletonCartItem = ({ theme }) => (
-  <div className={`flex gap-4 ${theme.card} w-full p-2 shadow-sm rounded animate-shimmer`}>
+  <div
+    className={`flex gap-4 ${theme.card} w-full p-2 shadow-sm rounded animate-shimmer`}
+  >
     <div className="w-20 h-20 bg-gray-400/20 rounded" />
     <div className="flex-1 flex flex-col gap-2 py-1">
       <div className="h-4 w-3/4 bg-gray-400/30 rounded"></div>
@@ -83,58 +85,88 @@ const Cart = () => {
           <>
             <div className="flex flex-col gap-[3px]">
               {cart.map((item) => (
-                <Link
-                  to={`/ProductsDetails/${item.productId}`}
+                <div
                   key={item.productId}
-                  className={`flex gap-4 ${theme.card} w-full p-2 shadow-sm rounded hover:shadow-lg transition`}
+                  className={`flex gap-2 items-center ${theme.card} w-full p-2 shadow-sm rounded`}
                 >
-                  {/* Checkbox mobile */}
-                  <div className="flex items-center sm:hidden">
+                  {/* Checkbox mobile (outside Link) */}
+                  <div className="flex items-center justify-center sm:hidden h-20">
                     <input
                       type="checkbox"
                       checked={selectedItems.includes(item.productId)}
-                      onChange={(e) => {
-                        e.preventDefault();
-                        toggleSelect(item.productId);
-                      }}
+                      onChange={() => toggleSelect(item.productId)}
                     />
                   </div>
+                  {/* Link wrapping rest of the card */}
+                  <Link
+                    to={`/ProductsDetails/${item.productId}`}
+                    className="flex gap-4 flex-1 hover:shadow-lg transition rounded"
+                  >
+                    <img
+                      src={item.image || "/placeholder.png"}
+                      alt={item.name}
+                       loading="lazy"
+                      className="w-20 h-20 object-cover rounded"
+                    />
 
-                  <img
-                    src={item.image || "/placeholder.png"}
-                    alt={item.name}
-                    className="w-20 h-20 object-cover rounded"
-                  />
-
-                  <div className="flex flex-col flex-1">
-                    <h2 className="font-semibold text-sm sm:text-base line-clamp-2">
-                      {item.name}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-gray-500">
-                      {item.brand || "No Brand"}
-                    </p>
-                    <div className="mt-1 flex items-center justify-between">
-                      <div>
-                        {item.discountprice > 0 ? (
-                          <>
+                    <div className="flex flex-col flex-1">
+                      <h2 className="font-semibold text-sm sm:text-base line-clamp-2">
+                        {item.name}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-gray-500">
+                        {item.brand || "No Brand"}
+                      </p>
+                      <div className="mt-1 flex items-center justify-between">
+                        <div>
+                          {item.discountprice > 0 ? (
+                            <>
+                              <p className="text-[#F59E0B] font-semibold text-sm sm:text-lg">
+                                Rs. {item.discountprice}
+                              </p>
+                              <p className="line-through text-gray-400 text-xs sm:text-sm">
+                                Rs. {item.price}
+                              </p>
+                            </>
+                          ) : (
                             <p className="text-[#F59E0B] font-semibold text-sm sm:text-lg">
-                              Rs. {item.discountprice}
-                            </p>
-                            <p className="line-through text-gray-400 text-xs sm:text-sm">
                               Rs. {item.price}
                             </p>
-                          </>
-                        ) : (
-                          <p className="text-[#F59E0B] font-semibold text-sm sm:text-lg">
-                            Rs. {item.price}
-                          </p>
-                        )}
-                      </div>
+                          )}
+                        </div>
 
-                      <div className="flex sm:hidden items-center gap-2 border rounded px-2">
+                        <div className="flex sm:hidden items-center gap-2 border rounded px-2">
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              updateQuantity(item.productId, item.quantity - 1);
+                            }}
+                            disabled={item.quantity <= 1}
+                            className="px-2 py-1"
+                          >
+                            -
+                          </button>
+                          <span className="text-sm">{item.quantity}</span>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              updateQuantity(item.productId, item.quantity + 1);
+                            }}
+                            className="px-2 py-1"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="hidden sm:flex items-center gap-4">
+                      <div className="flex items-center gap-2 border rounded px-2">
                         <button
                           onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             updateQuantity(item.productId, item.quantity - 1);
                           }}
                           disabled={item.quantity <= 1}
@@ -146,6 +178,7 @@ const Cart = () => {
                         <button
                           onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             updateQuantity(item.productId, item.quantity + 1);
                           }}
                           className="px-2 py-1"
@@ -153,43 +186,19 @@ const Cart = () => {
                           +
                         </button>
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="hidden sm:flex items-center gap-4">
-                    <div className="flex items-center gap-2 border rounded px-2">
                       <button
                         onClick={(e) => {
                           e.preventDefault();
-                          updateQuantity(item.productId, item.quantity - 1);
+                          e.stopPropagation();
+                          removeItem(item.productId);
                         }}
-                        disabled={item.quantity <= 1}
-                        className="px-2 py-1"
+                        className="text-red-500 hover:text-red-700"
                       >
-                        -
-                      </button>
-                      <span className="text-sm">{item.quantity}</span>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          updateQuantity(item.productId, item.quantity + 1);
-                        }}
-                        className="px-2 py-1"
-                      >
-                        +
+                        <Trash2 size={20} />
                       </button>
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        removeItem(item.productId);
-                      }}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               ))}
             </div>
 

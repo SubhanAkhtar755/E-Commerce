@@ -201,6 +201,7 @@ const Orders = () => {
                 <img
                   src={order.products[0]?.image || "/placeholder.png"}
                   alt={order.products[0]?.name}
+                   loading="lazy"
                   className="w-20 h-20 object-cover rounded border"
                 />
                 <div className="flex flex-col">

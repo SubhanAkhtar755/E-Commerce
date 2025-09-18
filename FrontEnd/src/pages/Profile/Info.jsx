@@ -137,6 +137,7 @@ const Info = () => {
             <img
               src={formData.image.url}
               alt="Profile"
+               loading="lazy"
               className={`w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-2 transition ${
                 isEditing ? "blur-[2px]" : ""
               }`}

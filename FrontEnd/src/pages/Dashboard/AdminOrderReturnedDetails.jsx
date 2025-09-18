@@ -149,6 +149,7 @@ const AdminOrderReturnedDetails = () => {
             <img
               src={p.image}
               alt={p.name}
+              loading="lazy"
               className="w-16 h-16 object-cover rounded"
             />
             <div className="flex-1">
@@ -169,54 +170,36 @@ const AdminOrderReturnedDetails = () => {
       <h3 className="text-lg font-semibold mb-2 mt-6">
         Return Request Details
       </h3>
-      {returnRequest && returnRequest.requested ? (
-        <div className={`p-4 rounded-lg shadow ${theme.card}`}>
-          <p>
-            <strong>Return Requested:</strong> Yes
-          </p>
-          <p>
-            <strong>Requested At:</strong>{" "}
-            {new Date(returnRequest.requestedAt).toLocaleString()}
-          </p>
-          <p>
-            <strong>Return Code:</strong> {returnRequest.returnCode || "N/A"}
-          </p>
-          <p>
-            <strong>Reason:</strong> {returnRequest.reason || "N/A"}
-          </p>
-          <p>
-            <strong>Issue:</strong> {returnRequest.issue || "N/A"}
-          </p>
-          <p>
-            <strong>Status:</strong> {returnRequest.status}
-          </p>
-
-          {/* Proof Images */}
-          {returnRequest.status === "Pending" &&
-          returnRequest.images &&
-          returnRequest.images.length > 0 ? (
-            <div className="mt-2">
-              <strong>Proof Images:</strong>
-              <div className="flex gap-2 mt-1 flex-wrap">
-                {returnRequest.images.map((img, idx) => (
-                  <img
-                    key={idx}
-                    src={img.url}
-                    alt={`Proof ${idx + 1}`}
-                    className="w-20 h-20 object-cover rounded border"
-                  />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <p className="mt-2 text-sm">
-              Images are deleted when the status is Approved or Rejected. You’ll
-              receive an email when the status is Completed.
-            </p>
-          )}
+      {/* Proof Images */}
+      {returnRequest.status === "Pending" &&
+      returnRequest.images &&
+      returnRequest.images.length > 0 ? (
+        <div className="mt-2">
+          <strong>Proof Images:</strong>
+          <div className="flex gap-2 mt-1 flex-wrap">
+            {returnRequest.images.map((img, idx) => (
+              <a
+                key={idx}
+                href={img.url}
+                download={`proof-${idx + 1}.jpg`} // 👈 download attribute
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={img.url}
+                  alt={`Proof ${idx + 1}`}
+                  loading="lazy"
+                  className="w-20 h-20 object-cover rounded border hover:opacity-80 cursor-pointer"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       ) : (
-        <p>No return request made for this order.</p>
+        <p className="mt-2 text-sm">
+          Images are deleted when the status is Approved or Rejected. You’ll
+          receive an email when the status is Completed.
+        </p>
       )}
     </div>
   );

@@ -123,14 +123,20 @@ const ProductsAdd = ({ editMode = false }) => {
     }
   };
 
-  // 🔹 Jodit Config
-  const editorConfig = {
-    readonly: false,
-    height: 300,
-    placeholder: "Write product description here...",
-    toolbarAdaptive: false,
-    uploader: { insertImageAsBase64URI: true },
-  };
+// 🔹 Jodit Config
+const editorConfig = {
+  readonly: false,
+  height: 300,
+  placeholder: "Write product description here...",
+  toolbarAdaptive: false,
+  uploader: { insertImageAsBase64URI: true },
+  theme: darkMode ? "#1F2937" : "default",
+  style: {
+    background: darkMode ? "#1F2937" : "#fff",
+    color: darkMode ? "#F9FAFB" : "#111827",
+    fontSize: "14px",
+  },
+};
 
   return (
     <div

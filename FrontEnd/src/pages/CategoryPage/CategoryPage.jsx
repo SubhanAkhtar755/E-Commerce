@@ -129,6 +129,7 @@ const CategoryPage = () => {
           <img
             src="https://images.pexels.com/photos/532558/pexels-photo-532558.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt={slug}
+             loading="lazy"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent flex flex-col items-center justify-center text-center px-4">
@@ -168,6 +169,7 @@ const CategoryPage = () => {
                       <img
                         src={product.images?.[0]?.url || "https://via.placeholder.com/300"}
                         alt={product.name}
+                         loading="lazy"
                         className="h-full w-full object-cover transform hover:scale-105 transition duration-300"
                       />
                     </div>

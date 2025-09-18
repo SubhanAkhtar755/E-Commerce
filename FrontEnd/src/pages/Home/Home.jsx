@@ -37,7 +37,7 @@ const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const Home = () => {
   const { darkMode } = useDarkMode();
   const { products, loading, error } = useProducts();
-console.log(products);
+  console.log(products);
 
   const theme = darkMode
     ? {
@@ -107,6 +107,7 @@ console.log(products);
             <img
               src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600"
               alt="Banner1"
+              loading="lazy"
               className="w-full h-[250px] md:h-[400px] object-cover"
             />
           </SwiperSlide>
@@ -114,6 +115,7 @@ console.log(products);
             <img
               src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600"
               alt="Banner2"
+              loading="lazy"
               className="w-full h-[250px] md:h-[400px] object-cover"
             />
           </SwiperSlide>
@@ -121,54 +123,56 @@ console.log(products);
             <img
               src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200"
               alt="Banner3"
+              loading="lazy"
               className="w-full h-[250px] md:h-[400px] object-cover"
             />
           </SwiperSlide>
         </Swiper>
       </section>
+
       {/* Small Promo Banners */}
       <section className="px-6 md:px-16 py-6 grid grid-cols-2 md:grid-cols-4 gap-4">
         <img
           src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800"
           alt="Promo1"
+          loading="lazy"
           className="rounded-lg shadow-md"
         />
         <img
           src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=1200"
           alt="Promo2"
+          loading="lazy"
           className="rounded-lg shadow-md"
         />
         <img
           src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=1200"
           alt="Promo3"
+          loading="lazy"
           className="rounded-lg shadow-md"
         />
         <img
           src="https://images.unsplash.com/photo-1507680434567-5739c80be1ac?w=1200"
           alt="Promo4"
+          loading="lazy"
           className="rounded-lg shadow-md"
         />
       </section>
+
       {/* Flash Sale Section */}
       {saleProducts.length > 0 && (
         <section className="px-2 lg:px-8 py-10 relative">
-          {/* <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-[#F59E0B]">⚡ Flash Sale</h2>
-          </div> */}
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-[#F59E0B]">⚡ Flash Sale</h2>
-            <span className="text-xs text-gray-400 italic">
-              drag → products
-            </span>
+            <span className="text-xs text-gray-400 italic">drag → products</span>
           </div>
           <Swiper
             modules={[Navigation]}
             navigation
             spaceBetween={10}
             breakpoints={{
-              0: { slidesPerView: 2, navigation: false }, // 👈 mobile pr arrows off
-              768: { slidesPerView: 3, navigation: true }, // 👈 tablet pr arrows on
-              1024: { slidesPerView: 4, navigation: true }, // 👈 desktop pr arrows on
+              0: { slidesPerView: 2, navigation: false },
+              768: { slidesPerView: 3, navigation: true },
+              1024: { slidesPerView: 4, navigation: true },
             }}
           >
             {saleProducts.map((product) => {
@@ -194,6 +198,7 @@ console.log(products);
                           "https://via.placeholder.com/300"
                         }
                         alt={product.name}
+                        loading="lazy"
                         className="h-full w-full object-cover transform hover:scale-105 transition duration-300"
                       />
                     </div>
@@ -263,6 +268,7 @@ console.log(products);
                       "https://via.placeholder.com/300"
                     }
                     alt={product.name}
+                    loading="lazy"
                     className="h-full w-full object-cover transform hover:scale-105 transition duration-300"
                   />
                 </div>

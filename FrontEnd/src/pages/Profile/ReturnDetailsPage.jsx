@@ -312,6 +312,7 @@ const ReturnDetailPage = () => {
               <img
                 src={item.image}
                 alt={item.name}
+                 loading="lazy"
                 className="w-16 h-16 object-cover rounded border"
               />
               <div>
@@ -371,6 +372,7 @@ const ReturnDetailPage = () => {
                         key={i}
                         src={img.url}
                         alt={`return-img-${i}`}
+                         loading="lazy"
                         className="w-28 h-28 object-cover rounded border"
                       />
                     ))}

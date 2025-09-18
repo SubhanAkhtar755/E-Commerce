@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")).render(
             <CartProvider> {/* ✅ Wrap with CartProvider */}
               <App />
               {/* ✅ ToastContainer ek dafa yahan */}
-              <ToastContainer position="top-right" autoClose={3000} />
+              <ToastContainer position="top-right" autoClose={2000} />
             </CartProvider>
           </ProductProvider>
         </UserProvider>

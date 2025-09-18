@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useDarkMode } from "../../context/DarkModeContext";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import Footer2 from "../../components/Footer/Footer2";
 
 const Profile = () => {
   const { darkMode } = useDarkMode();

@@ -149,6 +149,7 @@ const SearchPage = () => {
                   <img
                     src={product.images?.[0]?.url || "https://via.placeholder.com/300"}
                     alt={product.name}
+                     loading="lazy"
                     className="h-full w-full object-cover transform hover:scale-105 transition duration-300"
                   />
                 </div>
