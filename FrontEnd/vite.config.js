@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(),  tailwindcss(), VitePWA({
+  plugins: [react(), tailwindcss(), VitePWA({
     registerType: 'prompt',
     injectRegister: false,
 
@@ -15,10 +15,11 @@ export default defineConfig({
     },
 
     manifest: {
-      name: 'FrontEnd',
-      short_name: 'FrontEnd',
+      name: 'ShopVibe',
+      short_name: 'ShopVibe',
       description: 'A modern shopping PWA offering speed, offline support, and a native app-like experience.',
-      theme_color: '#101240',
+      theme_color: '#111827',
+      background_color: '#111827' // ✅ Add this line
     },
 
     workbox: {
