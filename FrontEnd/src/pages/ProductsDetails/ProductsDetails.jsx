@@ -115,7 +115,9 @@ const ProductsDetails = () => {
   const hasDiscount =
     product.discountprice && product.discountprice < product.price;
   const discountPercentage = hasDiscount
-    ? Math.round(((product.price - product.discountprice) / product.price) * 100)
+    ? Math.round(
+        ((product.price - product.discountprice) / product.price) * 100
+      )
     : 0;
 
   const handleShare = () => {
@@ -263,7 +265,10 @@ const ProductsDetails = () => {
           </div>
 
           <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl font-bold" style={{ color: theme.accent }}>
+            <span
+              className="text-2xl font-bold"
+              style={{ color: theme.accent }}
+            >
               RS {hasDiscount ? product.discountprice : product.price}
             </span>
             {hasDiscount && (
@@ -279,7 +284,9 @@ const ProductsDetails = () => {
           <div className="mt-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span className="text-sm font-medium">Quantity:</span>
-              <div className={`flex items-center border rounded-lg ${theme.card}`}>
+              <div
+                className={`flex items-center border rounded-lg ${theme.card}`}
+              >
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   className="px-3 py-2 hover:bg-gray-300/30"
@@ -335,6 +342,18 @@ const ProductsDetails = () => {
           </div>
         </div>
       </div>
+   {product.content && (
+  <div className="mt-12 pt-1 border-t border-gray-300 dark:border-gray-700">
+    <h3 className=" font-bold mb-4">
+      Product Details – {product.name}
+    </h3>
+    <div
+      className="prose max-w-none dark:prose-invert"
+      dangerouslySetInnerHTML={{ __html: product.content }}
+    />
+  </div>
+)}
+
     </div>
   );
 };

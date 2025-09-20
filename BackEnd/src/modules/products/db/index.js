@@ -15,7 +15,8 @@ const PostData = async (Data) =>
 
 // Update
 const updateData = async (id, data) =>
-  await Product.findByIdAndUpdate(id, data, { new: true });
+  await Product.findByIdAndUpdate(id, { $set: data }, { new: true, runValidators: true });
+
 
 // Delete
 const deleteData = async (id) => await Product.findByIdAndDelete(id);

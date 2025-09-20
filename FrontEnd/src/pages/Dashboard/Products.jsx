@@ -153,14 +153,13 @@ const Products = () => {
               <div className="flex items-center justify-between mt-1">
                 <div className="flex items-center gap-2">
                   <p className="text-[#F59E0B] font-semibold text-sm">
-                    $
-                    {product.discountprice > 0
+                    RS {product.discountprice > 0
                       ? product.discountprice
                       : product.price}
                   </p>
                   {product.discountprice > 0 && (
                     <p className="line-through text-gray-400 text-xs">
-                      ${product.price}
+                      RS {product.price}
                     </p>
                   )}
                 </div>

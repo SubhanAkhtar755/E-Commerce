@@ -1,8 +1,6 @@
 import { getData, updateData } from "../db/index.js";
 import cloudinary from "../../../utils/cloudinary.js";
-
 const updateProductService = async (id, data = {}, files = {}) => {
-  // purana product nikaal lo
   const existingProduct = await getData(id);
   if (!existingProduct) {
     throw new Error("Product not found");
@@ -10,14 +8,12 @@ const updateProductService = async (id, data = {}, files = {}) => {
 
   let images = existingProduct.images || [];
 
-  // agar new images aaye to purani delete + nayi upload
+  // agar new images aaye
   if (files.images) {
-    // 🔥 purani images delete
     for (const img of images) {
       await cloudinary.uploader.destroy(img.public_id);
     }
 
-    // 🔥 new images upload
     const fileArray = Array.isArray(files.images) ? files.images : [files.images];
     images = [];
 
@@ -33,12 +29,16 @@ const updateProductService = async (id, data = {}, files = {}) => {
     }
   }
 
-  // safe update fields
+  // ✅ Saare schema fields yahan map karo
   const productData = {
     name: data?.name ?? existingProduct.name,
-    description: data?.description ?? existingProduct.description,
-    price: data?.price ? Number(data.price) : existingProduct.price,
-    stock: data?.stock ? Number(data.stock) : existingProduct.stock,
+    content: data?.content ?? existingProduct.content,
+    price: data?.price !== undefined ? Number(data.price) : existingProduct.price,
+    discountprice: data?.discountprice !== undefined ? Number(data.discountprice) : existingProduct.discountprice,
+    stock: data?.stock !== undefined ? Number(data.stock) : existingProduct.stock,
+    category: data?.category ?? existingProduct.category,
+    sale: data?.sale !== undefined ? data.sale : existingProduct.sale,
+    brand: data?.brand ?? existingProduct.brand,
     images,
   };
 
