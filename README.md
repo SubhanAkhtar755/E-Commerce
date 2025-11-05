@@ -6,7 +6,7 @@ A complete Ecommerce Website built with **MERN Stack (MongoDB, Express, React, N
 
 ## Live Demo
 
-> [Visit Live Site](#)  
+> [Visit Live Site](https://e-commerce-upo6.onrender.com/)  
 > ⚠️ **Note:** The backend may take a few seconds to start on Render. Please wait when opening the site.
 
 ---
@@ -54,9 +54,9 @@ The website is **mobile responsive** and can be extended to create custom ecomme
 
 > Replace these placeholders with your screenshots
 
-- ![Homepage](./images/homepage.png)  
-- ![Product Page](./images/product-page.png)  
-- ![Dashboard](./images/dashboard.png)  
+- ![Homepage](https://github.com/SubhanAkhtar755/E-Commerce/blob/main/HomePage.png)  
+- ![Product Page](https://github.com/SubhanAkhtar755/E-Commerce/blob/main/HomePage2.png)  
+- ![Dashboard](https://github.com/SubhanAkhtar755/E-Commerce/blob/main/HomePage3.png)  
 
 ---
 
